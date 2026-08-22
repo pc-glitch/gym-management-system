@@ -1,0 +1,291 @@
+/* =========================================
+   1. 字体引入 & 基础设置 (Rounded Bright Glass Style)
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* --- 核心色板 --- */
+  --color-primary: #409EFF; /* Element Plus 默认蓝，或者更亮一点 */
+  --color-success: #67C23A;
+  --color-warning: #E6A23C;
+  --color-danger: #F56C6C;
+  --color-info: #909399;
+
+  --bg-body: #f0f2f5; /* 浅灰背景，凸显玻璃感 */
+  --bg-glass: rgba(255, 255, 255, 0.7);
+  --bg-glass-hover: rgba(255, 255, 255, 0.85);
+  --bg-glass-strong: rgba(255, 255, 255, 0.95);
+
+  --text-main: #303133;
+  --text-regular: #606266;
+  --text-secondary: #909399;
+  --text-placeholder: #A8ABB2;
+
+  --border-color: rgba(255, 255, 255, 0.6);
+  --border-color-hover: rgba(255, 255, 255, 0.9);
+
+  /* --- Element Plus 变量覆盖 --- */
+  --el-color-primary: var(--color-primary);
+  --el-text-color-primary: var(--text-main);
+  --el-text-color-regular: var(--text-regular);
+  --el-text-color-secondary: var(--text-secondary);
+  
+  --el-bg-color: #ffffff;
+  --el-bg-color-page: var(--bg-body);
+  --el-bg-color-overlay: rgba(255, 255, 255, 0.9);
+
+  --el-border-color: #dcdfe6;
+  --el-border-color-light: #e4e7ed;
+  --el-border-color-lighter: #ebeef5;
+
+  /* 核心特征：圆角 */
+  --el-border-radius-base: 8px;
+  --el-border-radius-small: 4px;
+  --el-border-radius-round: 20px;
+  --el-border-radius-circle: 50%;
+
+  --font-sans: 'Inter', sans-serif;
+  --el-font-family: var(--font-sans);
+
+  /* 柔和阴影 */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+  --shadow-base: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+}
+
+/* =========================================
+   2. 全局基础样式
+   ========================================= */
+body {
+  background-color: var(--bg-body);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(64, 158, 255, 0.1) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(245, 108, 108, 0.05) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(103, 194, 58, 0.05) 0px, transparent 50%);
+  background-attachment: fixed;
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+}
+
+/* 滚动条美化 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(144, 147, 153, 0.3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(144, 147, 153, 0.5);
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* =========================================
+   3. Element Plus 组件深度定制 (Glass Style)
+   ========================================= */
+
+/* --- 按钮 (Button) --- */
+.el-button {
+  border-radius: 8px !important;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid transparent;
+}
+
+.el-button--primary {
+  background: linear-gradient(135deg, #409EFF 0%, #3a8ee6 100%) !important;
+  box-shadow: 0 4px 10px rgba(64, 158, 255, 0.3);
+  border: none !important;
+}
+.el-button--primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 15px rgba(64, 158, 255, 0.4);
+  filter: brightness(1.05);
+}
+
+.el-button--default {
+  background: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid #dcdfe6 !important;
+  color: var(--text-main) !important;
+  backdrop-filter: blur(4px);
+}
+.el-button--default:hover {
+  background: #fff !important;
+  border-color: var(--color-primary) !important;
+  color: var(--color-primary) !important;
+}
+
+/* --- 输入框 (Input) --- */
+.el-input__wrapper,
+.el-textarea__inner {
+  background-color: rgba(255, 255, 255, 0.6) !important;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  box-shadow: none !important;
+  border-radius: 8px !important;
+  transition: all 0.3s;
+  padding: 8px 12px !important;
+}
+
+.el-input__wrapper:hover,
+.el-textarea__inner:hover {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  box-shadow: 0 0 0 1px rgba(64, 158, 255, 0.3) !important;
+}
+
+.el-input__wrapper.is-focus,
+.el-textarea__inner:focus {
+  background-color: #fff !important;
+  box-shadow: 0 0 0 2px rgba(64, 158, 255, 0.2) !important;
+}
+
+/* --- 卡片 (Card) --- */
+.el-card {
+  border: 1px solid rgba(255, 255, 255, 0.6) !important;
+  border-radius: 16px !important;
+  background: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(12px);
+  box-shadow: var(--glass-shadow) !important;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.el-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(31, 38, 135, 0.12) !important;
+  background: rgba(255, 255, 255, 0.85) !important;
+}
+
+.el-card__header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+  padding: 16px 24px !important;
+}
+
+/* --- 表格 (Table) --- */
+.el-table {
+  --el-table-border-color: rgba(0, 0, 0, 0.05);
+  --el-table-header-bg-color: rgba(255, 255, 255, 0.5);
+  --el-table-row-hover-bg-color: rgba(64, 158, 255, 0.08);
+  background-color: transparent !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+}
+
+.el-table th.el-table__cell {
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  color: var(--text-main) !important;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+}
+
+.el-table tr {
+  background-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.el-table td.el-table__cell {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03) !important;
+}
+
+/* --- 标签 (Tag) --- */
+.el-tag {
+  border-radius: 6px !important;
+  border: none !important;
+  font-weight: 500;
+}
+.el-tag--success { background: rgba(103, 194, 58, 0.15) !important; color: #67C23A !important; }
+.el-tag--warning { background: rgba(230, 162, 60, 0.15) !important; color: #E6A23C !important; }
+.el-tag--danger { background: rgba(245, 108, 108, 0.15) !important; color: #F56C6C !important; }
+.el-tag--primary { background: rgba(64, 158, 255, 0.15) !important; color: #409EFF !important; }
+
+/* --- 对话框 (Dialog) --- */
+.el-dialog {
+  border-radius: 20px !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15) !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+}
+
+.el-dialog__header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  margin-right: 0 !important;
+  padding: 20px 24px !important;
+}
+
+.el-dialog__footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 20px 24px !important;
+}
+
+/* --- 菜单/下拉 (Dropdown) --- */
+.el-dropdown-menu {
+  border-radius: 12px !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
+  padding: 6px !important;
+}
+
+.el-dropdown-menu__item {
+  border-radius: 6px !important;
+  margin: 2px 0;
+}
+.el-dropdown-menu__item:hover {
+  background-color: rgba(64, 158, 255, 0.1) !important;
+  color: var(--color-primary) !important;
+}
+
+/* --- 开关 (Switch) --- */
+.el-switch__core {
+  border-radius: 12px !important;
+  border: 1px solid rgba(0,0,0,0.1) !important;
+}
+.el-switch__action {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* --- 加载 (Loading) --- */
+.el-loading-mask {
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(4px);
+}
+
+/* =========================================
+   4. 业务组件适配
+   ========================================= */
+.image-upload-container .upload-area {
+  border: 2px dashed rgba(0, 0, 0, 0.1) !important;
+  border-radius: 12px !important;
+  background-color: rgba(255, 255, 255, 0.5);
+  transition: all 0.3s;
+}
+.image-upload-container .upload-area:hover {
+  border-color: var(--color-primary) !important;
+  background-color: rgba(64, 158, 255, 0.05);
+}
+
+.info-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+.info-header .el-avatar {
+  border: 2px solid #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* 描述列表 */
+.el-descriptions__table.is-bordered .el-descriptions__cell {
+  border: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+.el-descriptions__label.is-bordered-label {
+  background-color: rgba(250, 250, 250, 0.8) !important;
+  color: var(--text-regular) !important;
+}
+.el-descriptions__content.is-bordered-content {
+  background-color: rgba(255, 255, 255, 0.6) !important;
+}

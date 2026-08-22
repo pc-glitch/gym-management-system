@@ -1,0 +1,33 @@
+# ===== Dependencies / build output =====
+node_modules/
+target/
+*.class
+*.jar
+*.war
+
+# ===== IDE =====
+.idea/
+.vscode/
+*.iml
+
+# ===== WorkBuddy internal data =====
+.workbuddy/
+
+# ===== Generated outputs / reports =====
+outputs/
+reports/
+
+# ===== Runtime uploads (created at app runtime) =====
+upload/
+
+# ===== OS / misc =====
+.DS_Store
+Thumbs.db
+*.log
+*.cache
+
+# ===== Secrets / local env =====
+.env
+.env.local
+*.env.local
+.env.*.local

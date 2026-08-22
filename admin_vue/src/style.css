@@ -1,0 +1,94 @@
+/* =========================================
+   behind40 全局样式：Newsprint Desk（报刊编辑台）
+   - 关键词：细线排版 / 纸面网点 / 大标题 / 留白
+   - 仅使用原生 CSS；不引入外部资源；避免“渐变紫”
+   ========================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--ed40-ink, #1f2937);
+  font-family: var(
+    --ed40-font,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Arial,
+    "Microsoft YaHei UI",
+    "Microsoft YaHei",
+    "PingFang SC",
+    sans-serif
+  );
+  background-color: var(--ed40-bg, #faf8f4);
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(31, 41, 55, 0.06) 1px, transparent 0),
+    radial-gradient(circle at 2px 2px, rgba(194, 65, 12, 0.06) 1px, transparent 0);
+  background-size: 18px 18px, 36px 36px;
+  background-attachment: fixed;
+}
+
+#app {
+  min-height: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(194, 65, 12, 0.18);
+}
+
+:focus-visible {
+  outline: 2px solid rgba(194, 65, 12, 0.35);
+  outline-offset: 2px;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(31, 41, 55, 0.06);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(31, 41, 55, 0.22);
+  border-radius: 999px;
+  border: 2px solid rgba(250, 248, 244, 0.85);
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(31, 41, 55, 0.32);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
+

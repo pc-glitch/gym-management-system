@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="myproject.dao.MessageDao">
+
+    <resultMap type="myproject.entity.MessageEntity" id="messageMap">
+        <result property="id" column="id"/>
+        <result property="fromId" column="from_id"/>
+        <result property="toId" column="to_id"/>
+        <result property="type" column="type"/>
+        <result property="contentType" column="content_type"/>
+        <result property="contentId" column="content_id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="username" column="username"/>
+        <result property="avatarurl" column="avatarurl"/>
+
+    </resultMap>
+    <sql id="selectFields">
+        `id`, `from_id`, `to_id`, `type`, `content_type`, `content_id`, `update_time`, `username`, `avatarurl`
+    </sql>
+    <select id="listMessage" resultType="myproject.common.entity.Message">
+        select * from (
+        select
+        <include refid="selectFields"/>
+        from `message`
+        where type = #{type} and
+        ((from_id = #{fromId} and to_id = #{toId}) or (from_id = #{toId} and to_id = #{fromId}))
+        order by update_time desc
+        limit 0, #{count}
+        ) as ms
+        order by ms.update_time;
+    </select>
+    <select id="historyUserID" resultType="myproject.vo.MessageVO">
+        SELECT contact_id AS fromId, username AS name, avatarurl
+        FROM (
+            SELECT 
+                CASE WHEN from_id = #{userId} THEN to_id ELSE from_id END AS contact_id,
+                username,
+                avatarurl,
+                create_time,
+                ROW_NUMBER() OVER (PARTITION BY CASE WHEN from_id = #{userId} THEN to_id ELSE from_id END ORDER BY create_time DESC) AS rn
+            FROM message
+            WHERE from_id = #{userId} OR to_id = #{userId}
+        ) AS temp
+        WHERE rn = 1
+        ORDER BY create_time DESC;
+    </select>
+
+    <insert id="insertMessage" parameterType="myproject.common.entity.Message" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO message (from_id, to_id, type, content_id, content_type, username, avatarurl, create_time, update_time)
+        VALUES (#{fromId}, #{toId}, #{type}, #{contentId}, #{contentType}, #{username}, #{avatarurl}, NOW(), NOW())
+    </insert>
+
+</mapper>
